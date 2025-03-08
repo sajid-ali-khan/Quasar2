@@ -28,7 +28,7 @@ def generate_questions(skill, level, goal):
     """
 
     response = model.generate_content(prompt)
-
+    print(response)
     try:
         return clean_json_response(response.text)
     except json.JSONDecodeError:

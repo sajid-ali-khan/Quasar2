@@ -32,42 +32,25 @@ def evaluate_quiz(data):
 
     # AI Prompt
     prompt = f"""
-    You are an AI assistant designed to estimate the total number of **hours** a user needs to learn a skill, based on their **quiz performance, prior knowledge, and learning goal**.
+You are an AI expert in personalized learning assessment. Your task is to generate **10 multiple-choice questions** in valid JSON format.  
 
-    ### **Learning Constraints:**
-    - The user can dedicate **6 to 9 hours per week**.
-    - The **maximum duration is 12 weeks** (72 to 108 hours total).
-    - The estimated time should be **within this range**.
+### **Rules for Question Generation:**
+1. Each question must have **exactly 4 short options** (under 5 words each).  
+2. **No explanations, comments, or metadata**—only pure JSON output.  
+3. The output **must be a valid JSON array** enclosed within square brackets (`[` and `]`).  
+4. **DO NOT include triple backticks (` ```json `) or Markdown formatting**.  
+5. Questions should be **relevant** to:
+   - Skill: {skill}
+   - Self-assessed level: {level}
+   - Goal: {goal}
 
-    ### **User Information:**
-    - **Skill:** {skill}
-    - **Self-assessed level:** {level}
-    - **Learning goal:** {goal}`
+### **OUTPUT FORMAT (STRICTLY FOLLOW THIS STRUCTURE):**
+```json
+[
+  {{"id": 1, "question": "What is AI?", "options": ["Machine learning", "A software", "Physics concept", "Algorithm"]}},
+  {{"id": 2, "question": "Use of cloud computing?", "options": ["Data storage", "Cooking", "Car repair", "Gardening"]}}
+]
 
-    ### **Quiz Details:**
-    - Below are the **questions and answer choices**:
-      {json.dumps(questions, indent=2)}
-    - Below are the user's selected answers with question index according to above questions sequence(if "" for any question index the question is skipped by user)**:
-      {json.dumps(selected_options, indent=2)}
-
-    ### **Task:**
-    1. **Analyze** the difficulty of the skill.
-    2. **Evaluate** the user's quiz performance.
-    3. **Adjust** learning time based on:
-       - The skill's complexity.
-       - The user's quiz accuracy.
-       - Their prior knowledge (based on self-assessed level).
-       - The depth of the learning goal (basic vs. advanced).
-    4. **Ensure** the estimated time falls within **72 to 108 hours**.
-
-    ### **Output Format:**  
-    Provide the estimated learning time in **valid JSON format only** with no extra text, explanations, or comments.
-
-    ```json
-    {{
-        "estimated_time": <integer>
-    }}
-    ```
     """
 
     response = model.generate_content(prompt)
