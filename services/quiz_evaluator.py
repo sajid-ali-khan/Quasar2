@@ -73,8 +73,7 @@ def evaluate_quiz(data):
     response = model.generate_content(prompt)
 
     try:
-        result = json.loads(response.text.strip("```json").strip("```").strip())
-        return result
+        return clean_json_response(response.text)
     except error as e:
         print(e)
         return {"error": "Invalid response format", "actual": e}
