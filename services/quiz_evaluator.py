@@ -42,7 +42,7 @@ def evaluate_quiz(data):
     ### **User Information:**
     - **Skill:** {skill}
     - **Self-assessed level:** {level}
-    - **Learning goal:** {goal}
+    - **Learning goal:** {goal}`
 
     ### **Quiz Details:**
     - Below are the **questions and answer choices**:
