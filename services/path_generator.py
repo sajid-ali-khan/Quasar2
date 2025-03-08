@@ -16,7 +16,7 @@ def generate_path(data):
     level = data.get("level")
     goal = data.get("goal")
     duration_weeks = data.get("duration_weeks")
-    estimated_hours = data.get("estimated_hours")  # From hrs_estimator
+    estimated_hours = data.get("estimated_hours")
 
     if not all([skill, level, goal, duration_weeks, estimated_hours]):
         return jsonify({"error": "Missing required fields"}), 400

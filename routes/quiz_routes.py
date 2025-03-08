@@ -25,9 +25,6 @@ def generate_quiz():
 
 @quiz_bp.route('/evaluate_quiz', methods=['POST'])
 def evaluate_quiz_route():
-    """
-    Endpoint for evaluating quiz responses.
-    """
     data = request.get_json()
     return evaluate_quiz(data)
 

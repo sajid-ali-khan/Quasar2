@@ -15,8 +15,8 @@ def generate_questions(skill, level, goal):
     Output format:
     ```json
     [
-      {{"question": "What is AI?", "options": ["Machine learning", "A software", "Physics concept", "Algorithm"]}},
-      {{"question": "Use of cloud computing?", "options": ["Data storage", "Cooking", "Car repair", "Gardening"]}}
+      {{"id": 1, "question": "What is AI?", "options": ["Machine learning", "A software", "Physics concept", "Algorithm"]}},
+      {{"id": 2, "question": "Use of cloud computing?", "options": ["Data storage", "Cooking", "Car repair", "Gardening"]}}
     ]
     ```
 
