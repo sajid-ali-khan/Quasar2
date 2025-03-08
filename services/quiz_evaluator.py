@@ -1,3 +1,5 @@
+from logging import error
+
 import google.generativeai as genai
 import json
 
@@ -45,7 +47,7 @@ def evaluate_quiz(data):
     ### **Quiz Details:**
     - Below are the **questions and answer choices**:
       {json.dumps(questions, indent=2)}
-    - Below are the **user's selected answers**:
+    - Below are the user's selected answers with question index according to above questions sequence(if "" for any question index the question is skipped by user)**:
       {json.dumps(selected_options, indent=2)}
 
     ### **Task:**
@@ -63,7 +65,7 @@ def evaluate_quiz(data):
 
     ```json
     {{
-        "estimated_time": <integer>  // Must be between 72 and 108 hours
+        "estimated_time": <integer>
     }}
     ```
     """
@@ -71,6 +73,8 @@ def evaluate_quiz(data):
     response = model.generate_content(prompt)
 
     try:
-        return json.loads(response.text.strip("```json").strip("```").strip())
-    except json.JSONDecodeError:
-        return {"error": "Invalid response format"}
+        result = json.loads(response.text.strip("```json").strip("```").strip())
+        return result
+    except error as e:
+        print(e)
+        return {"error": "Invalid response format", "actual": e}
