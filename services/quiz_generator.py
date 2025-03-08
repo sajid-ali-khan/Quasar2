@@ -1,7 +1,6 @@
 import google.generativeai as genai
 import json
 from config import Config
-from utils.json_utils import clean_json_response
 
 genai.configure(api_key=Config.GEMINI_API_KEY)
 model = genai.GenerativeModel("gemini-2.0-flash")
@@ -28,8 +27,8 @@ def generate_questions(skill, level, goal):
     """
 
     response = model.generate_content(prompt)
-    print(response)
+
     try:
-        return clean_json_response(response.text)
+        return json.loads(response.text.strip("```json").strip("```").strip())
     except json.JSONDecodeError:
         return {"error": "Invalid response format"}
