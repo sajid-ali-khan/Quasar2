@@ -37,7 +37,7 @@ def get_youtube_link(topic_name):
             "type": "video",
             "videoDuration": duration,  # Try medium first, then short
             "order": "viewCount",  # Sort by most viewed
-            "videoType": "episode"  # Exclude shorts and live streams
+
         }
 
         response = requests.get(search_url, params=params)
