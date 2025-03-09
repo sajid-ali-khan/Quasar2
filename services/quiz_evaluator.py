@@ -11,9 +11,6 @@ model = genai.GenerativeModel("gemini-2.0-flash")
 
 
 def evaluate_quiz(data):
-    """
-    Evaluates quiz responses and estimates mastery time.
-    """
     questions = data.get("questions", [])
     selected_options = data.get("selected_options", [])
     skill = data.get("skill")

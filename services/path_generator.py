@@ -11,6 +11,20 @@ from utils.json_utils import clean_json_response
 genai.configure(api_key=Config.GEMINI_API_KEY)
 model = genai.GenerativeModel("gemini-2.0-flash")
 
+def extract_modules_with_weeks(roadmap_data):
+    modules_with_weeks = []
+    print(roadmap_data)
+    for entry in roadmap_data:
+        week = entry["week"]
+        for module in entry["modules"]:
+            modules_with_weeks.append({
+                "week": week,
+                "moduleId": module["moduleId"],
+                "title": module["title"],
+                "topics": module["topics"],
+            })
+    return modules_with_weeks
+
 def generate_path(data):
     skill = data.get("skill")
     level = data.get("level")
@@ -76,6 +90,10 @@ this is for mat for one week
 {{
   "roadmapId": "{roadmap_id}",
   "courseId": "{course_id}",
+  "courseName": <a relevant course name based on data>,
+  "category": <a category name based on course>,
+  "duration": <estimated_hours>,
+  "remaining": < >,
   "roadmapData": [
     {{
       "week": 1,

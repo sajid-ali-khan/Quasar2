@@ -2,7 +2,7 @@ import uuid
 
 from flask import Blueprint, request, jsonify
 
-from services.path_generator import generate_path
+from services.path_generator import generate_path, extract_modules_with_weeks
 from services.quiz_generator import generate_questions
 from services.quiz_evaluator import evaluate_quiz
 
@@ -33,3 +33,11 @@ def evaluate_quiz_route():
 def path_generator():
     data = request.get_json()
     return generate_path(data)
+
+@quiz_bp.route('/generate_path/module', methods=['POST'])
+def path_generator_module():
+    data = request.get_json()
+    res = generate_path(data)
+    finalResult = extract_modules_with_weeks(res["roadmapData"])
+    print(finalResult)
+    return finalResult
